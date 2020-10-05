@@ -4,9 +4,13 @@
 The goal of this project is to safely and optimally travel in a busy highway.The Path and behavioral planner must show the following results
 
 * Be at the speed limit of 50 miles per hr
+
 * Total acceleration should not exceed 10 m/s^2
+
 * The car must not collide with any vehicle either during lane following or lane changing phase.
+
 * The total jerk should not exceed 10 m/s^3
+
 * Car must optimally change lanes such that it completes the track as fast as possible.
 
 
