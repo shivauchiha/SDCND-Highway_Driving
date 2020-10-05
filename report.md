@@ -16,12 +16,19 @@ The goal of this project is to safely and optimally travel in a busy highway.The
 
 ## Rubric Points
 *Compilations -> done
+
 *atleast 4.32 miles covered -> done
+
 *Car drives within speed limit -> done
+
 *Jerk and acceleration safety limit not exceeded -> done
+
 *No collisions -> done
+
 *Car stays in lane -> done
+
 *Chnage lane behaviour -> done
+
 *Reflection -> done
 
 
@@ -31,6 +38,7 @@ The goal of this project is to safely and optimally travel in a busy highway.The
 The similator sends two key information - sensorfusion of ego vehicle and other participant vehicle . We also have a map of trajectory in separate txt file which we use as reference path for the car to follow. We do two things in first part we try to generate a smooth trajectory based on the waypoints car covered and our known global trajector. This smooth trajectory generator can account for lane change as well . The we write a FSM logic to help the car decided when to follow lane or change lane depending upon the sensor fusion data of other vechiles surrounding it .
 
 ###Smooth trajectory generator.
+
 To generate a smooth trajectory we first see wether there are any waypoints left in previous path . If yes we add that as well , then we select three waypoints that are 30,60,90 S units from the car . depending upon lane choosen the d unit will vary . We then use a c++ spline implementation to fit a spline over these way points. We keep a limit on the size of waypoints to 50 points at any instance.So if there are any old way points we use that and fill rest with waypoints with our generated spline object.
 
 
@@ -39,6 +47,8 @@ Before we change lane we should see if our candidate lane is safe to take . This
 
 
 '''
+
+
 bool lane_safe(json sensor_fusion,int lane,double car_s,int prev_size,bool& safe,double& cost)
 { cost = 0;
   safe = true;
@@ -91,7 +101,9 @@ bool lane_safe(json sensor_fusion,int lane,double car_s,int prev_size,bool& safe
 Our FSM follow three transition - 
 
 *If in middle lane check if left or right lane is free.If both are free chose the lane with largest free distance.
+
 *If lane is in left/right then see if lane in middle is safe to take . if yes change lane to centre.
+
 *If no safe lane exists to change slow the speed of the car without exceeding jerk.
 
 
